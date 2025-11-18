@@ -1,6 +1,6 @@
 
 .reviews .mySwiper{
-  height: 460px;
+  height: 260px;
 }
 .reviews .mySwiper .swiper-slide {
   transform: translateY(30px) !important;

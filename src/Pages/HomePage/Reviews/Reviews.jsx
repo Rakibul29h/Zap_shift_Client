@@ -3,11 +3,21 @@ import ReviewCard from "./ReviewCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
 import "swiper/css";
+import customerTop from '../../../assets/customer-top.png'
 const Reviews = ({ reviewPromise }) => {
   const reviewData = use(reviewPromise);
   console.log(reviewData);
   return (
-    <div className="reviews my-50">
+    <div className="reviews my-20">
+      <div className="w-1/2 mx-auto mb-20">
+        <div className=" flex justify-center my-5">
+          <img src={customerTop} alt="" />
+        </div>
+        <div className="text-center">
+          <h2 className="text-4xl text-secondary font-extrabold my-5">What our customers are sayings</h2>
+          <p>Enhance posture, mobility, and well-being effortlessly with Posture Pro. Achieve proper alignment, reduce pain, and strengthen your body with ease!</p>
+        </div>
+      </div>
 
       <Swiper
       loop={true}
