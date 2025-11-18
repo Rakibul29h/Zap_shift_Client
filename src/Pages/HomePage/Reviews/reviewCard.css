@@ -1,0 +1,20 @@
+
+.reviews .mySwiper{
+  height: 460px;
+}
+.reviews .mySwiper .swiper-slide {
+  transform: translateY(30px) !important;
+  transition: 0.3s ease;
+}
+
+/* Keep the active slide at normal position */
+.reviews .mySwiper .swiper-slide-active {
+  transform: translateY(0px) !important;
+}
+
+/* Add side gap from the center slide */
+.reviews .mySwiper .swiper-slide-prev,
+.reviews .mySwiper .swiper-slide-next {
+  margin-top: 30px; /* down */
+  transform: translateY(30px) !important;
+}
