@@ -3,10 +3,14 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../../Hook/UseAuthHook/useAuth";
 
 const Login = () => {
-
+  const {signIn,user,setUser}=useAuth()
     const {register,handleSubmit}=useForm()
   const handleForm=(data)=>{
-    
+    signIn(data.email,data.password)
+    .then(result=>{
+      console.log(result);
+      setUser(result);
+    }).catch(err=>console.log(err))
   }
   return (
     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl mx-auto">

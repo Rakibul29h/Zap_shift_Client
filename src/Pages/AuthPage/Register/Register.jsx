@@ -16,6 +16,7 @@ const Register = () => {
     createAccount(data.email,data.Password)
     .then(result=>{
       setUser(result.user)
+      console.log(result)
     }).catch(err=>console.log(err))
   };
   return (
