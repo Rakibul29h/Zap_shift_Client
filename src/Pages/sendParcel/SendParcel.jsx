@@ -1,19 +1,29 @@
 import { SpaceIcon } from "lucide-react";
 import React from "react";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
 
 const SendParcel = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
-  const serviceCenter=useLoaderData();
-  const regionsArea=serviceCenter.map(r=>r.region);
-  const regions =[...new Set(regionsArea)];
+  const serviceCenter = useLoaderData();
+  const regionsArea = serviceCenter.map((r) => r.region);
+  const regions = [...new Set(regionsArea)];
 
+  const districtByRegion = (region) => {
+    const districtData = serviceCenter.filter((d) => d.region == region);
+    const district = districtData.map((d) => d.district);
+    return district;
+  };
+  const senderRegion = watch("senderRegion");
+  const reciverRegion = watch("reciverRegion");
+
+  // handle Send Parcel section
   const handleSendParcel = (data) => {
     console.log(data);
   };
@@ -97,15 +107,35 @@ const SendParcel = () => {
             </fieldset>
             <fieldset className="fieldset">
               <label className="label">Sender Region</label>
-              <select {...register("senderRegion")} defaultValue=" " className="select">
+              <select
+                {...register("senderRegion")}
+                defaultValue={" "}
+                className="select w-full"
+              >
                 <option disabled={true}>Pick a Region</option>
-                {
-                  regions.map((region,index)=><option key={index} value={region}>{region}</option>)  
-                }
-
+                {regions.map((region, index) => (
+                  <option key={index} value={region}>
+                    {region}
+                  </option>
+                ))}
               </select>
-
             </fieldset>
+            <fieldset className="fieldset">
+              <label className="label">Sender District</label>
+              <select
+                {...register("senderDistrict")}
+                defaultValue=" "
+                className="select w-full"
+              >
+                <option disabled={true}>Pick a Region</option>
+                {districtByRegion(senderRegion).map((dis, index) => (
+                  <option key={index} value={dis}>
+                    {dis}
+                  </option>
+                ))}
+              </select>
+            </fieldset>
+
             <fieldset className="fieldset my-5">
               <label className="label">Sender Address</label>
               <input
@@ -140,15 +170,35 @@ const SendParcel = () => {
             </fieldset>
             <fieldset className="fieldset">
               <label className="label">Reciver Region</label>
-              <select {...register("reciverRegion")} defaultValue=" " className="select">
-                <option disabled={true}>Pick a Region</option>
-                {
-                  regions.map((region,index)=><option key={index} value={region}>{region}</option>)  
-                }
-
+              <select
+                {...register("reciverRegion")}
+                defaultValue=""
+                className="select w-full"
+              >
+                <option disabled={true}>Select Region</option>
+                {regions.map((region, index) => (
+                  <option key={index} value={region}>
+                    {region}
+                  </option>
+                ))}
               </select>
-
             </fieldset>
+            <fieldset className="fieldset">
+              <label className="label">Reciver District</label>
+              <select
+                {...register("reciverDistrict")}
+                defaultValue=""
+                className="select w-full"
+              >
+                <option disabled={true}>Select District</option>
+                {districtByRegion(reciverRegion).map((dis, index) => (
+                  <option key={index} value={dis}>
+                    {dis}
+                  </option>
+                ))}
+              </select>
+            </fieldset>
+
             <fieldset className="fieldset my-5">
               <label className="label">Reciver Address</label>
               <input
