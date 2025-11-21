@@ -6,11 +6,12 @@ const Navbar = () => {
 
   const {user,logOut,loading}=useAuth()
     const links=<>
-        <li> <NavLink to={""}>Services</NavLink> </li>
-        <li> <NavLink to={"/coverage"}>Coverage</NavLink> </li>
-        <li> <NavLink to={"/"}>About Us</NavLink> </li>
-        <li> <NavLink to={"/"}>Pricing</NavLink> </li>
-        <li> <NavLink to={"/rider"}>Be a Rider</NavLink> </li>
+        <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}    to={""}>Services</NavLink> </li>
+        <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")} to={"/coverage"}>Coverage</NavLink> </li>
+        <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}  to={"/"}>About Us</NavLink> </li>
+        <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}  to={"/"}>Pricing</NavLink> </li>
+        <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}  to={"/sendParcel"}>Send Parcel</NavLink> </li>
+        <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}  to={"/rider"}>Be a Rider</NavLink> </li>
       
     </>
     const handleLogOut=()=>{
