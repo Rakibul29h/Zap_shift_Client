@@ -2,6 +2,7 @@ import { SpaceIcon } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
+import Swal from "sweetalert2";
 
 const SendParcel = () => {
   const {
@@ -25,7 +26,38 @@ const SendParcel = () => {
 
   // handle Send Parcel section
   const handleSendParcel = (data) => {
-    console.log(data);
+    let cost = 0;
+    const parcelWeight = parseFloat(data.parcelWeight);
+    if (data.parcelType === "Document") {
+      cost = data.senderDistrict === data.reciverDistrict ? 60 : 80;
+    } else {
+      if (parcelWeight <= 3) {
+        cost = data.senderDistrict === data.reciverDistrict ? 110 : 150;
+      } else {
+        const extraWeight = parcelWeight - 3;
+        cost =
+          data.senderDistrict === data.reciverDistrict
+            ? 110 + extraWeight * 40
+            : 150 + extraWeight * 40 + 40;
+      }
+    }
+    Swal.fire({
+      title: "Agree to send a parcel?",
+      text: `You have to pay ${cost} taka`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Agree",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
   return (
     <div className="my-20 px-10">
