@@ -1,13 +1,24 @@
 import React from 'react';
 import Logo from '../../../Components/Logo/Logo';
-import { NavLink } from 'react-router';
-
+import { Link, NavLink } from 'react-router';
+import useAuth from '../../../Hook/UseAuthHook/useAuth'
 const Navbar = () => {
+
+  const {user,logOut,loading}=useAuth()
     const links=<>
         <li> <NavLink to={""}>Services</NavLink> </li>
-        <li> <NavLink to={""}>My Pge</NavLink> </li>
+        <li> <NavLink to={"/coverage"}>Coverage</NavLink> </li>
+        <li> <NavLink to={"/"}>About Us</NavLink> </li>
+        <li> <NavLink to={"/"}>Pricing</NavLink> </li>
+        <li> <NavLink to={"/rider"}>Be a Rider</NavLink> </li>
       
     </>
+    const handleLogOut=()=>{
+      logOut()
+      .catch(err=>{
+        console.log(err)
+      })
+    }
     return (
         <div>
             <div className="navbar bg-base-100 shadow-sm">
@@ -25,14 +36,16 @@ const Navbar = () => {
     <a className="btn btn-ghost text-xl"><Logo></Logo></a>
   </div>
   <div className="navbar-center hidden lg:flex">
-    <ul className="menu menu-horizontal px-1">
+    <ul className="menu menu-horizontal px-1 ">
      {
         links
      }
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Button</a>
+   {
+    loading?<span className="loading loading-dots loading-lg"></span>:user?<button className='btn' onClick={handleLogOut}>Log Out</button>:<Link className='btn ' to={'/login'}>Sign In</Link>
+   }
   </div>
 </div>
         </div>
