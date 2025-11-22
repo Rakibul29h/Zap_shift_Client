@@ -23,6 +23,7 @@ const Login = () => {
     googleLog()
     .then(result=>{
       setUser(result.user)
+        navigate(location?.state|| '/')
     }).catch(err=>console.log(err))
   }
   return (

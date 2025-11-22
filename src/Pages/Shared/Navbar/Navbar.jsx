@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from '../../../Components/Logo/Logo';
 import { Link, NavLink } from 'react-router';
 import useAuth from '../../../Hook/UseAuthHook/useAuth'
+
 const Navbar = () => {
 
   const {user,logOut,loading}=useAuth()
@@ -11,8 +12,11 @@ const Navbar = () => {
         <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}  to={"/"}>About Us</NavLink> </li>
         <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}  to={"/"}>Pricing</NavLink> </li>
         <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}  to={"/sendParcel"}>Send Parcel</NavLink> </li>
+        {
+          user &&   <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}  to={"/dashboard/my-parcels"}>My Parcels</NavLink> </li>
+        }
         <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}  to={"/rider"}>Be a Rider</NavLink> </li>
-      
+
     </>
     const handleLogOut=()=>{
       logOut()
@@ -31,12 +35,14 @@ const Navbar = () => {
       <ul
         tabIndex="-1"
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-            <links></links>
+          {
+            links
+          }
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl"><Logo></Logo></a>
+    <div><Logo></Logo></div>
   </div>
-  <div className="navbar-center hidden lg:flex">
+  <div className="navbar-center hidden lg:flex"> 
     <ul className="menu menu-horizontal px-1 ">
      {
         links

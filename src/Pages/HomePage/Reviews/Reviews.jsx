@@ -6,7 +6,6 @@ import "swiper/css";
 import customerTop from '../../../assets/customer-top.png'
 const Reviews = ({ reviewPromise }) => {
   const reviewData = use(reviewPromise);
-  console.log(reviewData);
   return (
     <div className="reviews my-20">
       <div className="w-1/2 mx-auto mb-20">

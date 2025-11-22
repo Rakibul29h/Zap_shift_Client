@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
 import useSecureAxios from "../../Hook/useSecurAxios/useSecureAxios";
+import useAuth from "../../Hook/UseAuthHook/useAuth";
 
 const SendParcel = () => {
   const {
@@ -12,7 +13,7 @@ const SendParcel = () => {
     watch,
     formState: { errors },
   } = useForm();
-
+  const {user}=useAuth();
   const axiosSecur=useSecureAxios();
   const serviceCenter = useLoaderData();
   const regionsArea = serviceCenter.map((r) => r.region);
@@ -53,8 +54,12 @@ const SendParcel = () => {
       confirmButtonText: "Agree",
     }).then((result) => {
       if (result.isConfirmed) {
+        console.log(cost);
+        data.cost=cost;
+
         axiosSecur.post("/parcels",data)
         .then(res=>console.log("After posting data",res.data))
+        .catch(err=>console.log(err))
       }
     });
   };
@@ -125,6 +130,7 @@ const SendParcel = () => {
                 {...register("senderName")}
                 className="input w-full focus:outline-none"
                 placeholder="Sender Name"
+                defaultValue={user?.displayName}
               />
             </fieldset>
             <fieldset className="fieldset my-5">
@@ -134,6 +140,7 @@ const SendParcel = () => {
                 {...register("senderMail")}
                 className="input w-full focus:outline-none"
                 placeholder="Sender E-mail"
+                defaultValue={user.email}
               />
             </fieldset>
             <fieldset className="fieldset">
