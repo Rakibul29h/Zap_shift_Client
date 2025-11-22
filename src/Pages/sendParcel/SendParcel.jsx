@@ -3,6 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import useSecureAxios from "../../Hook/useSecurAxios/useSecureAxios";
 
 const SendParcel = () => {
   const {
@@ -12,6 +13,7 @@ const SendParcel = () => {
     formState: { errors },
   } = useForm();
 
+  const axiosSecur=useSecureAxios();
   const serviceCenter = useLoaderData();
   const regionsArea = serviceCenter.map((r) => r.region);
   const regions = [...new Set(regionsArea)];
@@ -51,11 +53,8 @@ const SendParcel = () => {
       confirmButtonText: "Agree",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
+        axiosSecur.post("/parcels",data)
+        .then(res=>console.log("After posting data",res.data))
       }
     });
   };
