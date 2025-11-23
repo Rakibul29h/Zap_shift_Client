@@ -7,10 +7,10 @@ const Navbar = () => {
 
   const {user,logOut,loading}=useAuth()
     const links=<>
-        <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}    to={""}>Services</NavLink> </li>
+        <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}    to={"/service"}>Services</NavLink> </li>
         <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")} to={"/coverage"}>Coverage</NavLink> </li>
-        <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}  to={"/"}>About Us</NavLink> </li>
-        <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}  to={"/"}>Pricing</NavLink> </li>
+        <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}  to={"/aboutus"}>About Us</NavLink> </li>
+        <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}  to={"/pricing"}>Pricing</NavLink> </li>
         <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}  to={"/sendParcel"}>Send Parcel</NavLink> </li>
         {
           user &&   <li> <NavLink className={({isActive})=>(isActive?"bg-primary rounded-full":" ")}  to={"/dashboard/my-parcels"}>My Parcels</NavLink> </li>
@@ -19,7 +19,7 @@ const Navbar = () => {
 
     </>
     const handleLogOut=()=>{
-      logOut()
+            logOut()          
       .catch(err=>{
         console.log(err)
       })

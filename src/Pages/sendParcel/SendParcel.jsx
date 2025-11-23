@@ -1,7 +1,7 @@
 import { SpaceIcon } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import useSecureAxios from "../../Hook/useSecurAxios/useSecureAxios";
 import useAuth from "../../Hook/UseAuthHook/useAuth";
@@ -16,6 +16,7 @@ const SendParcel = () => {
   const {user}=useAuth();
   const axiosSecur=useSecureAxios();
   const serviceCenter = useLoaderData();
+  const navigate=useNavigate();
   const regionsArea = serviceCenter.map((r) => r.region);
   const regions = [...new Set(regionsArea)];
 
@@ -58,7 +59,12 @@ const SendParcel = () => {
         data.cost=cost;
 
         axiosSecur.post("/parcels",data)
-        .then(res=>console.log("After posting data",res.data))
+        .then(res=>{
+          if(res.data.insertedId)
+          {
+            navigate("/dashboard/my-parcels")
+          }
+        })
         .catch(err=>console.log(err))
       }
     });
