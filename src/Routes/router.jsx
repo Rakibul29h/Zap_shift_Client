@@ -10,6 +10,7 @@ import BeRider from "../Pages/Rider/BeRider";
 import SendParcel from "../Pages/sendParcel/SendParcel";
 import DashBoard from "../Layouts/DashBoard/DashBoard";
 import MyParcels from "../Pages/DashBoard/My-Parcels/MyParcels";
+import Payment from "../Pages/Payment/Payment";
 
 export const router=createBrowserRouter([
     {
@@ -62,8 +63,12 @@ export const router=createBrowserRouter([
         </PrivateRoutes>,
         children:[
             {
-                path:"/dashboard/my-parcels",
+                path:"my-parcels",
                 element:<MyParcels></MyParcels>
+            },
+            {
+                path:"payment/:parcelId",
+                element:<Payment></Payment>
             }
         ]
     }

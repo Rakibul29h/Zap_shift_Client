@@ -4,6 +4,7 @@ import useAuth from "../../../Hook/UseAuthHook/useAuth";
 import useSecureAxios from "../../../Hook/useSecurAxios/useSecureAxios";
 import { SquarePen, Trash2, View } from "lucide-react";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const MyParcels = () => {
   const { user } = useAuth();
@@ -49,7 +50,8 @@ const MyParcels = () => {
               <th>SL No</th>
               <th>Name</th>
               <th>Cost</th>
-              <th>Payment Status</th>
+              <th>Payment </th>
+              <th>Delivery Status</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -60,7 +62,8 @@ const MyParcels = () => {
                 <td>{index + 1}</td>
                 <td>{parcel.parcelName}</td>
                 <td>{parcel.cost}</td>
-                <td>Payment Status</td>
+                <td>{parcel.paymentStatus?<button className="btn">paid</button>:<Link to={`/dashboard/payment/${parcel._id}`} className="btn btn-primary text-black">Pay now</Link>}</td>
+                <td>Deliver...</td>
                 <td className="flex gap-2">
                   <button className="btn btn-square hover:bg-primary">
                     <View />
