@@ -8,7 +8,7 @@ import useAuth from '../UseAuthHook/useAuth';
 });
 const useSecureAxios = () => {
   const {user}=useAuth();
-  console.log(user)
+
   useEffect(()=>{
    const reqInterceptor= instance.interceptors.request.use((config)=>{
       

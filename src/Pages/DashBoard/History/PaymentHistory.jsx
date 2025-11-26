@@ -9,11 +9,10 @@ const PaymentHistory = () => {
   const { data: payment_data = [] } = useQuery({
     queryKey: ["history", [user.email]],
     queryFn: async () => {
-      const result = await axiosSecure(`/payment-data?email=${user.email}`);
+      const result = await axiosSecure(`/payments?email=${user.email}`);
       return result.data;
     },
   });
-  console.log(payment_data);
   return (
     <div>
       Payment history found.({payment_data.length});
@@ -32,7 +31,7 @@ const PaymentHistory = () => {
           <tbody>
             {
                 payment_data.map((data,index)=>
-                <tr>
+                <tr key={index}>
                     <td>{index+1}</td>
                     <td>{data.parcelName}</td>
                     <td>{data.currency}</td>

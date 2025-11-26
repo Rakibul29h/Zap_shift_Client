@@ -36,12 +36,12 @@ const DashBoard = () => {
             <Link to="/dashboard/my-parcels" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My-Parcels" >
                  <Truck size={16} />
             <span className='is-drawer-close:hidden'>
-                My Parcels
+              My Parcel
             </span>
             </Link>
         </li>
         <li>
-            <Link to="/dashboard/payment-history" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My-Parcels" >
+            <Link to="/dashboard/payment-history" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment-History" >
                  <History size={16} />
             <span className='is-drawer-close:hidden'>
                 History
