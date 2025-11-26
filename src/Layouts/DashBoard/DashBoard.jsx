@@ -1,4 +1,4 @@
-import { Truck } from 'lucide-react';
+import { History, Truck } from 'lucide-react';
 import React from 'react';
 import { Link, Outlet } from 'react-router';
 
@@ -13,7 +13,7 @@ const DashBoard = () => {
         {/* Sidebar toggle icon */}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg>
       </label>
-      <div className="px-4">Navbar Title</div>
+      <div className="px-4">Zap_Shift Dashboard</div>
     </nav>
     {/* Page content here */}
    <Outlet></Outlet>
@@ -34,9 +34,17 @@ const DashBoard = () => {
         </li>
         <li>
             <Link to="/dashboard/my-parcels" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My-Parcels" >
-                 <Truck size={20} />
+                 <Truck size={16} />
             <span className='is-drawer-close:hidden'>
                 My Parcels
+            </span>
+            </Link>
+        </li>
+        <li>
+            <Link to="/dashboard/payment-history" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="My-Parcels" >
+                 <History size={16} />
+            <span className='is-drawer-close:hidden'>
+                History
             </span>
             </Link>
         </li>

@@ -1,10 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuth from "../../../Hook/UseAuthHook/useAuth";
 import {updateProfile } from "firebase/auth";
 import { auth } from "../../../../firebase.init";
 import axios from "axios";
+import useSecureAxios from "../../../Hook/useSecurAxios/useSecureAxios";
 
 const Register = () => {
   const {
@@ -13,7 +14,9 @@ const Register = () => {
     handleSubmit,
   } = useForm();
 
-  const { createAccount, setUser, googleLog } = useAuth();
+const axiosSecure=useSecureAxios();
+const navigate=useNavigate();
+  const { createAccount, setUser, googleLog,logOut } = useAuth();
   const handleRegistration = (data) => {
     console.log(data);
     const file = data.photo[0];
@@ -28,11 +31,38 @@ const Register = () => {
           import.meta.env.VITE_imgBBKey
         }`;
         axios.post(imagApi, formData).then((result) => {
-         console.log(result);
+          const photoURL=result.data.data.url;
           updateProfile(auth.currentUser,{
             displayName:data.name,
-            photoURL: result.data.data.url
-          }).then(()=>console.log("Result updated"))
+            photoURL: photoURL
+          }).then(()=>{
+
+            logOut()
+            .catch(err=>{
+              console.log(err)
+            })
+            const userData={
+              email:data.email,
+              name:data.name,
+              photoURL:photoURL,
+              createdAt:new Date()
+            }
+
+            try{
+             axiosSecure.post("/users",userData)
+             .then(res=>{
+              if(res.data.insertedId)
+              {
+
+                navigate("/login")
+              }
+             })
+              
+              
+            }catch(error){
+              console.log("Error of inserting in the database",error);
+            }
+          })
           .catch(err=>console.log(err));
         });
         
