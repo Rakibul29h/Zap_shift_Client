@@ -10,7 +10,7 @@ const BeRider = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+   
   } = useForm();
 
   const { user } = useAuth();
