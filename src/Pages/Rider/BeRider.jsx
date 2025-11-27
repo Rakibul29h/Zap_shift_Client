@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hook/UseAuthHook/useAuth";
 import useSecureAxios from "../../Hook/useSecurAxios/useSecureAxios";
-import { useLoaderData, useNavigate } from "react-router";
+import { useLoaderData, } from "react-router";
 import Swal from "sweetalert2";
 import riderImg from "../../assets/agent-pending.png";
 const BeRider = () => {
@@ -16,7 +16,6 @@ const BeRider = () => {
   const { user } = useAuth();
   const axiosSecur = useSecureAxios();
   const serviceCenter = useLoaderData();
-  const navigate = useNavigate();
   const regionsArea = serviceCenter.map((r) => r.region);
   const regions = [...new Set(regionsArea)];
 
@@ -41,14 +40,14 @@ const BeRider = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         
-        // axiosSecur
-        //   .post("/parcels", data)
-        //   .then((res) => {
-        //     if (res.data.insertedId) {
-        //       navigate("/dashboard/my-parcels");
-        //     }
-        //   })
-        //   .catch((err) => console.log(err));
+        axiosSecur
+          .post("/riders", data)
+          .then((res) => {
+            if (res.data.insertedId) {
+             console.log("Successfully requested")
+            }
+          })
+          .catch((err) => console.log(err));
         console.log(data)
       }
     });

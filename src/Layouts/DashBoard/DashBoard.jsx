@@ -1,6 +1,7 @@
 import { History, Truck } from 'lucide-react';
 import React from 'react';
 import { Link, Outlet } from 'react-router';
+import { FaMotorcycle } from "react-icons/fa6";
 
 const DashBoard = () => {
     return (
@@ -42,9 +43,17 @@ const DashBoard = () => {
         </li>
         <li>
             <Link to="/dashboard/payment-history" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Payment-History" >
-                 <History size={16} />
+               <History size={16} />
             <span className='is-drawer-close:hidden'>
                 History
+            </span>
+            </Link>
+        </li>
+        <li>
+            <Link to="/dashboard/rider-request" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Rider-Request" >
+                  <FaMotorcycle />
+            <span className='is-drawer-close:hidden'>
+                RiderRequest
             </span>
             </Link>
         </li>
